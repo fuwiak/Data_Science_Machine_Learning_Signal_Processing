@@ -15,3 +15,13 @@ def create_data(theta, count=30, std_dev = 3):
     epsilon = st.norm.rvs(size = count, loc=0, scale = std_dev).reshape(count,1)
     Y =  np.dot(X,theta) + epsilon 
     return (X,Y)
+    
+    
+def rnorm(xy, y=None):
+     if y==None:
+        x,y = xy
+    else:
+        x = xy
+    theta = np.linalg.inv(np.dot(x.T, x))
+    theta = np.dot(theta, np.dot(x.T,y))
+    return theta
