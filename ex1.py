@@ -18,10 +18,25 @@ def create_data(theta, count=30, std_dev = 3):
     
     
 def rnorm(xy, y=None):
-     if y==None:
+    if y==None:
         x,y = xy
     else:
         x = xy
     theta = np.linalg.inv(np.dot(x.T, x))
     theta = np.dot(theta, np.dot(x.T,y))
     return theta
+    
+def agz(x, y, theta_0, alpha, npowt=10, all_thetas=False):
+    theta = theta_0
+    thetas = []
+    for p in range(npowt):
+        for j in range(theta.shape[0]):
+            delta = np.sum((np.dot(x,theta) - y) * x[j])
+            theta[j] = theta[j] - alpha*delta
+        if all_thetas: thetas.append(theta.copy())
+
+    if all_thetas:
+        return thetas
+    else:
+        return theta
+    
