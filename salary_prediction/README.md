@@ -3,4 +3,5 @@
 sudo easy_install pip
 
 sudo easy_install --upgrade six 
+
 sudo pip install --ignore-installed tensorflow
