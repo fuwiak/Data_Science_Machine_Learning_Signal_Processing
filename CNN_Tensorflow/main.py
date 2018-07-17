@@ -165,6 +165,46 @@ def next_batch(batch_size):
       end = index_in_epoch
       return train_images[start:end], train_labels[start:end]
 
+# init
+init = tf.global_variables_initializer()
+sess = tf.Session()
+sess.run(init)
 
+for i in range(2000+1): 
+    training_step(i, i % 100 == 0, i % 20 == 0)
+
+plt.plot(train_range, train_a, '-b', label= "training")
+plt.plot(test_range, test_a, '-g', label= "test")
+plt.legend()
+plt.xlabel('steps')
+plt.ylabel('accuracy')
+
+test_ims = pd.read_csv('test.csv') 
+print('there are {} images for test.'.format(test_ims.shape))
+images, _ = preprocess(test_ims, labeled = False)
+predict = tf.argmax(Y, 1)
+test_num = test_ims.shape[0]
+predicted_labels = np.zeros(test_num)
+batch_size = 100
+for i in range(test_num//batch_size):
+    start = i*batch_size
+    end = (i+1)*batch_size
+    predicted_labels[start:end] = sess.run(predict, {X: images[start:end], pkeep: 0.75})
+
+print(predicted_labels[:20])
+im_num = 26
+plt.figure(figsize = (20,16))
+for i in range(6):
+    plt.subplot(2, 3, i+1)
+    plt.imshow(images[im_num+i*10, :, :, 0])
+    plt.title("Predicted as {}".format(predicted_labels[im_num+i*10]))
+
+np.savetxt('submission_softmax.csv',
+          np.c_[range(1,len(test_ims)+1), predicted_labels],
+          delimiter = '',
+          header = 'ImageId, Label',
+          comments = '',
+          fmt = '%d')
+sess.close()
 
 
