@@ -44,6 +44,82 @@ lr = tf.placeholder(tf.float32)
 
 pkeep = tf.placeholder(tf.float32)
 
+K,L,M,N = 6, 12, 24, 200
+
+
+W1 = tf.Variable(tf.truncated_normal([6, 6, 1, K], stddev=0.1))  
+B1 = tf.Variable(tf.constant(0.1, tf.float32, [K]))
+W2 = tf.Variable(tf.truncated_normal([5, 5, K, L], stddev=0.1))
+B2 = tf.Variable(tf.constant(0.1, tf.float32, [L]))
+W3 = tf.Variable(tf.truncated_normal([4, 4, L, M], stddev=0.1))
+B3 = tf.Variable(tf.constant(0.1, tf.float32, [M]))
+
+W4 = tf.Variable(tf.truncated_normal([7 * 7 * M, N], stddev=0.1))
+B4 = tf.Variable(tf.constant(0.1, tf.float32, [N]))
+W5 = tf.Variable(tf.truncated_normal([N, 10], stddev=0.1))
+B5 = tf.Variable(tf.constant(0.1, tf.float32, [10]))
+
+#MODEL
+
+stride = 1  
+Y1 = tf.nn.relu(tf.nn.conv2d(X, W1, strides=[1, stride, stride, 1], padding='SAME') + B1)
+stride = 2  
+Y2 = tf.nn.relu(tf.nn.conv2d(Y1, W2, strides=[1, stride, stride, 1], padding='SAME') + B2)
+stride = 2  
+Y3 = tf.nn.relu(tf.nn.conv2d(Y2, W3, strides=[1, stride, stride, 1], padding='SAME') + B3)
+
+
+YY = tf.reshape(Y3, shape=[-1, 7 * 7 * M])
+
+Y4 = tf.nn.relu(tf.matmul(YY, W4) + B4)
+YY4 = tf.nn.dropout(Y4, pkeep)
+Ylogits = tf.matmul(YY4, W5) + B5
+Y = tf.nn.softmax(Ylogits)
+
+cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=Ylogits, labels=Y_)
+cross_entropy = tf.reduce_mean(cross_entropy)*100
+
+correct_prediction = tf.equal(tf.argmax(Y, 1), tf.argmax(Y_, 1))
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+
+train_step = tf.train.AdamOptimizer(lr).minimize(cross_entropy)
+
+train_a = [] 
+test_a = []
+train_range = []
+test_range=[]
+batch_size = 100
+
+#LEARNING 
+
+def training_step(i, update_test_data, update_train_data):
+
+    # training on batches of 100 images with 100 labels
+    batch_X, batch_Y = next_batch(batch_size)
+
+    # learning rate decay
+    max_learning_rate = 0.003
+    min_learning_rate = 0.0001
+    decay_speed = 2000.0
+    learning_rate = min_learning_rate + (max_learning_rate - min_learning_rate) * np.exp(-i/decay_speed)
+
+    # compute training values for visualisation
+    if update_train_data:
+        a, c = sess.run([accuracy, cross_entropy], {X: batch_X, Y_: batch_Y, pkeep: 1})
+        print(str(i) + ": accuracy:" + str(a) + " loss: " + str(c) + " (lr:" + str(learning_rate) + ")")
+       
+        train_a.append(a)
+        train_range.append(i)
+    # compute test values for visualisation
+    if update_test_data:
+        a, c = sess.run([accuracy, cross_entropy], {X: test_images, Y_: test_labels, pkeep: 1.0})
+        print(str(i) + ": ********* epoch " + str(i*100//train_images.shape[0]+1) + " ********* test accuracy:" + str(a) + " test loss: " + str(c))
+        #datavis.append_test_curves_data(i, a, c)
+        #datavis.update_image2(im)
+        test_a.append(a)
+        test_range.append(i)
+   # the backpropagation training step
+    sess.run(train_step, {X: batch_X, Y_: batch_Y, lr: learning_rate, pkeep: 0.75})
 
 
 
