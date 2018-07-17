@@ -121,6 +121,50 @@ def training_step(i, update_test_data, update_train_data):
    # the backpropagation training step
     sess.run(train_step, {X: batch_X, Y_: batch_Y, lr: learning_rate, pkeep: 0.75})
 
+epochs_completed = 0
+index_in_epoch = 0
+num_examples = train_images.shape[0]
+
+def next_batch(batch_size):
+    """Return the next `batch_size` examples from this data set."""
+    global train_images
+    global train_labels
+    global epochs_completed 
+    global index_in_epoch
+    
+    start = index_in_epoch
+    # Shuffle for the first epoch
+    if epochs_completed == 0 and start == 0:
+      perm0 = np.arange(num_examples)
+      np.random.shuffle(perm0)
+      train_images = train_images[perm0]
+      train_labels = train_labels[perm0]
+    # Go to the next epoch
+    if start + batch_size > num_examples:
+      # Finished epoch
+      epochs_completed += 1
+      # Get the rest examples in this epoch
+      rest_num_examples = num_examples - start
+      images_rest_part = train_images[start:num_examples]
+      labels_rest_part = train_labels[start:num_examples]
+      # Shuffle the data
+      
+      perm = np.arange(num_examples)
+      np.random.shuffle(perm)
+      train_images = train_images[perm]
+      train_labels = train_labels[perm]
+      # Start next epoch
+      start = 0
+      index_in_epoch = batch_size - rest_num_examples
+      end = index_in_epoch
+      images_new_part = train_images[start:end]
+      labels_new_part = train_labels[start:end]
+      return np.concatenate((images_rest_part, images_new_part), axis=0) , np.concatenate((labels_rest_part, labels_new_part), axis=0)
+    else:
+      index_in_epoch += batch_size
+      end = index_in_epoch
+      return train_images[start:end], train_labels[start:end]
+
 
 
 
