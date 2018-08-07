@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
 
-@author: pawel
-"""
 
 from sklearn.datasets import load_iris
 
