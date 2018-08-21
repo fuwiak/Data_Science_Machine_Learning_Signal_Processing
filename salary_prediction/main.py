@@ -26,10 +26,20 @@ CATEGORICAL_COLUMNS = ["workclass", "education", "marital_status",
 CONTINUOUS_COLUMNS = ["age", "education_num", "capital_gain", 
                       "capital_loss","hours_per_week"]
 
-df_train = pd.read_csv(train_file, names = COLUMNS, skipinitialspace = True,engine= "python")
+class ML:
+	def __init__(self, train_file, test_file):
+		self.train_file = train_file
+		self.test_file = test_file
+
+	def train(self):
+		df_train = pd.read_csv(self.train_file, names = COLUMNS, skipinitialspace = True,engine= "python")
+		df_train.dropna(how="any",axis = 0)
+
+
+
 df_test = pd.read_csv(test_file,names = COLUMNS,skipinitialspace = True, skiprows=1, engine = "python")
 
-df_train.dropna(how="any",axis = 0)
+
 df_test.dropna(how="any", axis = 0)
 
 df_train[LABEL_COLUMN] = (df_train["income_bracket"].apply(lambda x: ">50K" in x)).astype(int)
