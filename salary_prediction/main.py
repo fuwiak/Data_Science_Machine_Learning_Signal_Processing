@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-
 @author: pawel
 """
-
 import tensorflow as tf
 import tensorflow.contrib as contrib
 import pandas as pd
