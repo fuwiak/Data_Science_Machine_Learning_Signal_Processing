@@ -12,8 +12,6 @@ import numpy as np
 train_file = "adult-training.csv"
 test_file = "adult-test.csv"
 
-
-
 COLUMNS = ["age", "workclass", "fnlwgt", "education", "education_num",
            "marital_status", "occupation", "relationship", "race", 
            "gender", "capital_gain", "capital_loss", "hours_per_week", 
