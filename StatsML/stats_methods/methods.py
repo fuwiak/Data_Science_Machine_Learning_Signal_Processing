@@ -155,3 +155,5 @@ hammiest_words = words[:5]
 
 def drop_final_s(word):
     return re.sub("s$", "", word)
+
+
