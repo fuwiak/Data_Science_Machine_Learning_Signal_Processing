@@ -24,8 +24,8 @@ df["price"].apply(lambda x: x.replace("?", "0")).astype("float")
 
 
 from sklearn import tree
-x = df[numerical_columns]
-X =  [list(x[x.columns[i]]) for i in range(len(x.columns))]
+num = df[numerical_columns]
+NUM =  [list(num[num.columns[i]]) for i in range(len(num.columns))]
 
 
 yy = np.array(num[num.columns[0]]).reshape(-1,1)
@@ -33,3 +33,7 @@ yy = np.array(num[num.columns[0]]).reshape(-1,1)
 x1 = num[num.columns[0]]
 
 x2 = num[num.columns[0]]
+
+from sklearn import tree
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(x,y)
