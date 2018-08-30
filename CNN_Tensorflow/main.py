@@ -9,6 +9,7 @@ import matplotlib.cm as cm
 
 labeled_imag = pd.read_csv('train.csv')
 from sklearn.preprocessing import LabelBinarizer
+
 encoder = LabelBinarizer()
 
 img_num = labeled_images.shape[0]
@@ -30,7 +31,6 @@ def preprocess(data, labeled = True):
         labels = encoder.fit_transform(labels)
         
     return images, labels
-
 
 images, labels = preprocess(labeled_images, labeled = True)
 
