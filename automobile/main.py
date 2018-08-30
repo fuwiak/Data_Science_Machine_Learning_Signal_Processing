@@ -4,6 +4,7 @@
 
 import pandas as pd
 import numpy as np
+from sklearn import preprocessing
 
 
 df = pd.read_csv("dataset.csv")
@@ -27,14 +28,18 @@ df["price"].apply(lambda x: x.replace("?", "0")).astype("float")
 from sklearn import tree
 num = df[numerical_columns]
 NUM =  [list(num[num.columns[i]]) for i in range(len(num.columns))]
-
-
-yy = np.array(num[num.columns[0]]).reshape(-1,1)
-
 x1 = num[num.columns[0]]
 
 x2 = num[num.columns[1]]
 
+
+yy = np.array(num[num.columns[0]]).reshape(-1,1)
+
+lab_enc = preprocessing.LabelEncoder()
+encoded = lab_enc.fit_transform(x2)
+
+
+
 from sklearn import tree
 clf = tree.DecisionTreeClassifier()
-clf = clf.fit(x1.values.reshape(-1,1),x2)
+clf = clf.fit(x1.values.reshape(-1,1),encoded)
