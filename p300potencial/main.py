@@ -2,7 +2,6 @@ import scipy.io
 import os
 import numpy as np
 from data_sets import train_set, test_set1, test_set2
-
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as py
 from sklearn import tree
@@ -24,52 +23,93 @@ X, Y =  get_X_Y(train_set)
 X1, Y1 = get_X_Y(test_set1)
 X2, Y2 = get_X_Y(test_set2)
 
-#CL1
-clf = tree.DecisionTreeClassifier()
-clf = clf.fit(X, Y)
-y_pred = clf.predict(X1)
+class models:
+	def __init__(self, features, labels, clf, x_test):
+		self.features = features
+		self.labels = labels
+		self.clf = clf
+		self.x_test = x_test
 
-print(accuracy_score(Y1, y_pred))
-print(precision_score(Y1, y_pred))
-print(recall_score(Y1, y_pred))
-from sklearn.metrics import precision_recall_curve
+	def y_predicted(self):
+		self.clf = self.clf.fit(self.features, self.labels)
+		self.y_pred = self.clf.predict(self.x_test)
 
-precision, recall, threshold = precision_recall_curve(Y1, y_pred)
-def plot_precision_and_recall(precision, recall, threshold):
-    py.plot(threshold, precision[:-1], "r-", label="precision", linewidth=5)
-    py.plot(threshold, recall[:-1], "b", label="recall", linewidth=5)
-    py.xlabel("threshold", fontsize=19)
-    py.legend(loc="upper right", fontsize=19)
-    py.ylim([0, 1])
+
+	def classication_score(self, y_pred, y_test):
+		print(accuracy_score(self.y_pred, y_test))
+		print(precision_score(self.y_pred, y_test))
+		print(recall_score(self.y_pred, y_test))
+
+
+
+
+
+# tn, fp, fn, tp = confusion_matrix(Y, y_pred).ravel()
+
+
+#ROC
+
+# from sklearn.metrics import roc_curve
+
+
+# fpr, tpr, thresholds = roc_curve(Y, y_pred, pos_label=1)
+
+# # Print ROC curve
+# # py.plot(fpr,tpr)
+
+# py.plot(clf.predict_proba(X1))
+# py.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+# py.xlabel('False Positive Rate')
+# py.ylabel('True Positive Rate')
+
+# py.show()
+
+# #AUC
+# from sklearn.metrics import roc_auc_score
+
+# print("AUC = ", roc_auc_score(Y, y_pred))
+
+
+
+
+# from sklearn.metrics import precision_recall_curve
+
+# precision, recall, threshold = precision_recall_curve(Y1, y_pred)
+# def plot_precision_and_recall(precision, recall, threshold):
+#     py.plot(threshold, precision[:-1], "r-", label="precision", linewidth=5)
+#     py.plot(threshold, recall[:-1], "b", label="recall", linewidth=5)
+#     py.xlabel("threshold", fontsize=19)
+#     py.legend(loc="upper right", fontsize=19)
+#     py.ylim([0, 1])
+
+# # py.figure(figsize=(14, 7))
+# plot_precision_and_recall(precision, recall, threshold)
+# py.show()
+
+# def plot_precision_vs_recall(precision, recall):
+#     py.plot(recall, precision, "g--", linewidth=2.5)
+#     py.ylabel("recall", fontsize=19)
+#     py.xlabel("precision", fontsize=19)
+#     py.axis([0, 1.5, 0, 1.5])
 
 # py.figure(figsize=(14, 7))
-plot_precision_and_recall(precision, recall, threshold)
-py.show()
+# plot_precision_vs_recall(precision, recall)
+# py.show()
 
-def plot_precision_vs_recall(precision, recall):
-    py.plot(recall, precision, "g--", linewidth=2.5)
-    py.ylabel("recall", fontsize=19)
-    py.xlabel("precision", fontsize=19)
-    py.axis([0, 1.5, 0, 1.5])
+# from sklearn.metrics import roc_curve
+# false_positive_rate, true_positive_rate, thresholds = roc_curve(Y1, y_pred)
 
-py.figure(figsize=(14, 7))
-plot_precision_vs_recall(precision, recall)
-py.show()
+# # plotting them against each other# plotti 
+# def plot_roc_curve(false_positive_rate, true_positive_rate, label=None):
+#     py.plot(false_positive_rate, true_positive_rate, linewidth=2, label=label)
+#     py.plot([0, 1], [0, 1], 'r', linewidth=4)
+#     py.axis([0, 1, 0, 1])
+#     py.xlabel('False Positive Rate (FPR)', fontsize=16)
+#     py.ylabel('True Positive Rate (TPR)', fontsize=16)
 
-from sklearn.metrics import roc_curve
-false_positive_rate, true_positive_rate, thresholds = roc_curve(Y1, y_pred)
-
-# plotting them against each other# plotti 
-def plot_roc_curve(false_positive_rate, true_positive_rate, label=None):
-    py.plot(false_positive_rate, true_positive_rate, linewidth=2, label=label)
-    py.plot([0, 1], [0, 1], 'r', linewidth=4)
-    py.axis([0, 1, 0, 1])
-    py.xlabel('False Positive Rate (FPR)', fontsize=16)
-    py.ylabel('True Positive Rate (TPR)', fontsize=16)
-
-py.figure(figsize=(14, 7))
-plot_roc_curve(false_positive_rate, true_positive_rate)
-py.show()
+# py.figure(figsize=(14, 7))
+# plot_roc_curve(false_positive_rate, true_positive_rate)
+# py.show()
 
 #CL2
 # from sklearn import svm
@@ -124,25 +164,3 @@ py.show()
 
 
 
-tn, fp, fn, tp = confusion_matrix(Y, y_pred).ravel()
-
-
-#ROC
-
-from sklearn.metrics import roc_curve
-
-
-fpr, tpr, thresholds = roc_curve(Y, y_pred, pos_label=1)
-
-# Print ROC curve
-py.plot(fpr,tpr)
-py.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-py.xlabel('False Positive Rate')
-py.ylabel('True Positive Rate')
-
-py.show()
-
-#AUC
-from sklearn.metrics import roc_auc_score
-
-print("AUC = ", roc_auc_score(Y, y_pred))
