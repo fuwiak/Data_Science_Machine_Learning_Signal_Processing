@@ -88,3 +88,8 @@ df.to_sql(table_name, connection_object) # Writes to a SQL table
 df.to_json(filename) # Writes to a file in JSON format
 df.to_html(filename) # Saves as an HTML table
 df.to_clipboard() # Writes to the clipboard
+
+
+#INPUT
+########## Fill missing values for: Age ##########
+imp = Imputer(missing_values='NaN', strategy='most_frequent', axis=0)
