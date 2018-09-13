@@ -41,7 +41,7 @@ class models:
 		print(recall_score(self.y_pred, y_test))
 
 
-
+A = models(X, Y, )
 
 
 # tn, fp, fn, tp = confusion_matrix(Y, y_pred).ravel()
