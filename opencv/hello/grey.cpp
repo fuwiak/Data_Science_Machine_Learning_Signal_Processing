@@ -15,6 +15,9 @@ int main( int argc, char** argv ) {
   cv::Mat gray_image;
   cv::cvtColor( image, gray_image, CV_BGR2GRAY );
 
+  cv::imwrite( "Gray_Image.jpg", gray_image );
+
+
   cv::imshow( "Gray image", gray_image );
   
   cv::waitKey(0);
