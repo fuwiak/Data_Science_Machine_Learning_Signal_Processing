@@ -11,6 +11,8 @@ Multiclass classification price range ([0, 5000], [5000, 100000], etc]
 #p300potencial
 
 Binary Classification of p300 potencial
+
+
 Trzy zestawy danych zawierające macierze X (przykłady x cechy), Y - opisująca kategorię przykładów (1- target, 0 - non-target).
 - p300_DS1.mat
 - p300_DS2.mat
