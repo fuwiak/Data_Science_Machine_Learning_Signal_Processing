@@ -22,3 +22,31 @@ def deep(features_shape, num_classes, act='relu'):
     Model(inputs=x, outputs=o).summary()
     
     return Model(inputs=x, outputs=o)
+
+
+model = deep_cnn(INPUT_SHAPE, NUM_CLASSES)
+model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['acc'])
+
+callbacks = [EarlyStopping(monitor='val_acc', patience=4, verbose=1, mode='max')]
+
+history = model.fit_generator(generator=dsGen.generator(BATCH, mode='train'),
+                              steps_per_epoch=int(np.ceil(len(dsGen.df_train)/BATCH)),
+                              epochs=EPOCHS,
+                              verbose=1,
+                              callbacks=callbacks,
+                              validation_data=dsGen.generator(BATCH, mode='val'),
+                              validation_steps=int(np.ceil(len(dsGen.df_val)/BATCH)))
+
+
+model = deep_cnn(INPUT_SHAPE, NUM_CLASSES)
+model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['acc'])
+ 
+callbacks = [EarlyStopping(monitor='val_acc', patience=4, verbose=1, mode='max')]
+ 
+history = model.fit_generator(generator=dsGen.generator(BATCH, mode='train'),
+                              steps_per_epoch=int(np.ceil(len(dsGen.df_train)/BATCH)),
+                              epochs=EPOCHS,
+                              verbose=1,
+                              callbacks=callbacks,
+                              validation_data=dsGen.generator(BATCH, mode='val'),
+                              validation_steps=int(np.ceil(len(dsGen.df_val)/BATCH)))
