@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>project_p300</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="binary-classification-of-p300-potencial">Binary Classification of p300 potencial</h1>
+<p>Trzy zestawy danych zawierające macierze X (przykłady x cechy), Y - opisująca kategorię przykładów (1- target, 0 - non-target).</p>
+<ul>
+<li>p300_DS1.mat</li>
+<li>p300_DS2.mat</li>
+<li>p300_DS3.mat</li>
+</ul>
+<p>Sygnały zostały “zmontowane” za pomocą filtra przestrzennego CSP. Cechami wyliczonymi dla każdego przykładu są wariancje uśrednionych po 8 realizacjach sygnałów w odcinku 150 do 550 ms po bodźcu dla kadego ze źródeł estymowanych przez CSP. Zadaniem projektowym jest zaprojektowanie klasyfikatora, który wyuczony na danych ze zbioru p300_DS1.mat miałby możliwie najlepszą klasyfikację na dwóch pozostałych zbiorach i przedstawienie wyników porównawczych dla różnych klasyfikatorów.</p>
+<p>Praca przedstawia wynik użycia kilku typowych klasyfikatorów, oraz parametry oceniające jakość klasyfikacji. Do wykonania analizy zostanie użyty jezyk Python w wersji 3.</p>
+<h2 id="analiza">Analiza</h2>
+<h3 id="wczytanie-odpowiednich-bibliotek">Wczytanie odpowiednich bibliotek</h3>
+<pre class=" language-python"><code class="prism  language-python"><span class="token keyword">import</span> scipy<span class="token punctuation">.</span>io
+<span class="token keyword">import</span> os
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> accuracy_score
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> py
+<span class="token keyword">from</span> sklearn <span class="token keyword">import</span> tree
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> confusion_matrix
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> precision_score<span class="token punctuation">,</span> recall_score
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> precision_recall_curve
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>metrics <span class="token keyword">import</span> roc_curve
+</code></pre>
+<h3 id="wczytanie-analizowanych-zbiorów">Wczytanie analizowanych zbiorów</h3>
+<pre class=" language-python"><code class="prism  language-python">train_set <span class="token operator">=</span> scipy<span class="token punctuation">.</span>io<span class="token punctuation">.</span>loadmat<span class="token punctuation">(</span><span class="token string">"p300_DS1.mat"</span><span class="token punctuation">)</span>
+test_set1 <span class="token operator">=</span> scipy<span class="token punctuation">.</span>io<span class="token punctuation">.</span>loadmat<span class="token punctuation">(</span><span class="token string">"p300_DS2.mat"</span><span class="token punctuation">)</span>
+test_set2 <span class="token operator">=</span> scipy<span class="token punctuation">.</span>io<span class="token punctuation">.</span>loadmat<span class="token punctuation">(</span><span class="token string">"p300_DS3.mat"</span><span class="token punctuation">)</span> 
+</code></pre>
+</div>
+</body>
+
+</html>
