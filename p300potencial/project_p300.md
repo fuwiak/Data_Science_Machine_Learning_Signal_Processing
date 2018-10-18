@@ -94,3 +94,13 @@ py.figure(figsize=(14, 7))
 plot_roc_curve(false_positive_rate, true_positive_rate)
 py.show()
 ```
+**accuracy 0.83
+precision 0.86
+recall 0.55**
+
+
+Reference-style: 
+![roc_curve][logo]
+
+[logo]:https://github.com/fuwiak/Data_Science_Machine_Learning_Signal_Processing/blob/master/p300potencial/roc%20curve.png
+
