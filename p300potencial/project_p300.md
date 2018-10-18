@@ -67,5 +67,30 @@ def plot_roc_curve(false_positive_rate, true_positive_rate, label=None):
     py.axis([0, 1, 0, 1])
     py.xlabel('False Positive Rate (FPR)', fontsize=16)
     py.ylabel('True Positive Rate (TPR)', fontsize=16)
-```
 
+def show_evaluate(y, y_pred):
+    print("accuracy", accuracy_score(y, y_pred))
+    print("precision", precision_score(y, y_pred))
+    print("recall", recall_score(y, y_pred))
+```
+## Klasyfikatory
+### Drzewo decyzyjne
+
+``` Python
+clf = tree.DecisionTreeClassifier()
+clf = clf.fit(X, Y)
+y_pred = clf.predict(X1)
+probs = clf.predict_proba(X1)
+probs = probs[:, 1]
+show_evaluate(Y1, y_pred)
+precision, recall, threshold = precision_recall_curve(Y1, y_pred)
+false_positive_rate, true_positive_rate, thresholds= roc_curve(Y1, probs, pos_label=1)
+plot_precision_and_recall(precision, recall, threshold)
+py.show()
+py.figure(figsize=(14, 7))
+plot_precision_vs_recall(precision, recall)
+py.show()
+py.figure(figsize=(14, 7))
+plot_roc_curve(false_positive_rate, true_positive_rate)
+py.show()
+```
