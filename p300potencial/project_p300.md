@@ -24,9 +24,9 @@ from sklearn import tree
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score, recall_score
 from sklearn.metrics import precision_recall_curve
-from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_curve, auc
 ```
-### Wczytanie odpowiednich danych 
+### Wczytanie danych 
 
 
 ``` python
@@ -69,9 +69,12 @@ def plot_roc_curve(false_positive_rate, true_positive_rate, label=None):
     py.ylabel('True Positive Rate (TPR)', fontsize=16)
 
 def show_evaluate(y, y_pred):
-    print("accuracy", accuracy_score(y, y_pred))
-    print("precision", precision_score(y, y_pred))
-    print("recall", recall_score(y, y_pred))
+	N = 2
+    print("accuracy", round(accuracy_score(y, y_pred), N)
+    print("precision", round(precision_score(y, y_pred),N)
+    print("recall", round(recall_score(y, y_pred),N)
+    print("recall", round(auc,N)
+    
 ```
 ## Klasyfikatory
 ### Drzewo decyzyjne
@@ -94,9 +97,15 @@ py.figure(figsize=(14, 7))
 plot_roc_curve(false_positive_rate, true_positive_rate)
 py.show()
 ```
-- accuracy 0.83
-- precision 0.86
+- accuracy 0.83 - Prawdopodobieństwo prawidłowej klasyfikacji
+$$Accuracy = \frac{TP+TN}{P+N}$$
+-  precision 0.86
+$$Precision =\frac{TP}{TP+FP} $$
 - recall 0.55
+- $$Precision =\frac{TP}{TP+FN} $$
+What proportion of actual positives was identified correctly?
+
+**Note:** A model that produces no false negatives has a recall of 1.0.
 
 
 ![roc_curve][logo]
