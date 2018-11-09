@@ -79,6 +79,7 @@ df.apply(np.max, axis=1) # Applies a function across each row
 df1.append(df2) # Adds the rows in df1 to the end of df2 (columns should be identical)
 pd.concat([df1, df2],axis=1) # Adds the columns in df1 to the end of df2 (rows should be identical)
 df1.join(df2,on=col1,how='inner') # SQL-style joins the columns in df1 with the columns on df2 
+df.loc["two"] = [4,5,6] # add elemnts to row
 
 # Writing Data
 
