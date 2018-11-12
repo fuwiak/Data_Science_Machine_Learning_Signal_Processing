@@ -94,3 +94,6 @@ df.to_clipboard() # Writes to the clipboard
 #INPUT
 ########## Fill missing values for: Age ##########
 imp = Imputer(missing_values='NaN', strategy='most_frequent', axis=0)
+
+print(__doc__)
+Automatically created module for IPython interactive environment
