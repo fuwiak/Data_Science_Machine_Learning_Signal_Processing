@@ -90,6 +90,8 @@ df.to_json(filename) # Writes to a file in JSON format
 df.to_html(filename) # Saves as an HTML table
 df.to_clipboard() # Writes to the clipboard
 
+df.filter(like='facebook').head() #search for all column names that contain the exact string like facebook
+
 
 #INPUT
 ########## Fill missing values for: Age ##########
