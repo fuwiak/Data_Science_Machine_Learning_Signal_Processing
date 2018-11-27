@@ -1,4 +1,3 @@
-
 #version
 pkg-config --modversion opencv
 
