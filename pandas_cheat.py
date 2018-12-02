@@ -98,4 +98,4 @@ df.filter(like='facebook').head() #search for all column names that contain the 
 imp = Imputer(missing_values='NaN', strategy='most_frequent', axis=0)
 
 print(__doc__)
-Automatically created module for IPython interactive environment
+##Automatically created module for IPython interactive environment
