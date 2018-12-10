@@ -1,7 +1,6 @@
 
 # coding: utf-8
 
-# In[1]:
 
 import io
 import requests
@@ -9,7 +8,6 @@ import pandas as pd
 import numpy as np
 
 
-# In[3]:
 
 url="https://raw.githubusercontent.com/vincentarelbundock/Rdatasets/master/csv/ISLR/College.csv"
 s=requests.get(url).content
