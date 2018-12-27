@@ -155,6 +155,11 @@ Y = pd.cut(df.price, count_intervals, labels=LABELS)
 numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 numerical_columns = df.select_dtypes(include=numerics).columns
 X = df[numerical_columns]
+
+```
+
+
+```python
 #SHOW FIRST 10 ROWS
 X.head(10)
 
@@ -356,17 +361,14 @@ X.head(10)
 
 
 ```python
-df.columns
+X.columns
 ```
 
 
 
 
-    Index(['symboling', 'normalized-losses', 'make', 'fuel-type', 'aspiration',
-           'num-of-doors', 'body-style', 'drive-wheels', 'engine-location',
-           'wheel-base', 'length', 'width', 'height', 'curb-weight', 'engine-type',
-           'num-of-cylinders', 'engine-size', 'fuel-system', 'bore', 'stroke',
-           'compression-ratio', 'horsepower', 'peak-rpm', 'city-mpg',
+    Index(['symboling', 'wheel-base', 'length', 'width', 'height', 'curb-weight',
+           'engine-size', 'compression-ratio', 'horsepower', 'city-mpg',
            'highway-mpg', 'price'],
           dtype='object')
 
@@ -374,7 +376,7 @@ df.columns
 
 
 ```python
-df.describe().T
+X.describe().T
 ```
 
 
@@ -549,8 +551,27 @@ df.describe().T
 
 
 ```python
-#df.hist(bins=10)
+X.hist(bins=10)
 ```
+
+
+
+
+    array([[<matplotlib.axes._subplots.AxesSubplot object at 0x10c1cef28>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fbb5198>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fbde5c0>],
+           [<matplotlib.axes._subplots.AxesSubplot object at 0x10fc05b38>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fc380f0>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fc60668>],
+           [<matplotlib.axes._subplots.AxesSubplot object at 0x10fc86be0>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fcb91d0>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fcb9208>],
+           [<matplotlib.axes._subplots.AxesSubplot object at 0x10fd06c88>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fd37240>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fd5d7b8>]],
+          dtype=object)
+
+
 
 ## Models
 
