@@ -107,17 +107,9 @@ Z = pd.cut(df.price,count_intervals)
 
 ```python
 #SHOW INTERVALS
-Z.dtypes
+Z.dtypes;
 
 ```
-
-
-
-
-    CategoricalDtype(categories=[(5077.718, 10153.25], (10153.25, 15188.5], (15188.5, 20223.75], (20223.75, 25259.0], (25259.0, 30294.25], (30294.25, 35329.5], (35329.5, 40364.75], (40364.75, 45400.0]]
-                  ordered=True)
-
-
 
 
 ```python
@@ -540,7 +532,7 @@ from sklearn.metrics import accuracy_score
 print(accuracy_score(Y_test, predictions))
 ```
 
-    0.91
+    0.98
 
 
 
