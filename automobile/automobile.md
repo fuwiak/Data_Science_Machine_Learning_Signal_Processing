@@ -15,7 +15,7 @@ Prediction price of car using machine learning algorithms.
 
 
 | Attribute | Attribute Range | Type of variable |Short description | 
-| --- | --- |
+| --- | --- | --- | ---|
 | symboling | -3, -2, -1, 0, 1, 2, 3.  | discrete | desc |
 | normalized-losses|from 65 to 256 | discrete  | desc |
 | make |alfa-romero, audi, bmw, chevrolet, etc  | discrete  | desc |
