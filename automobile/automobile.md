@@ -11,13 +11,18 @@
 
 Prediction price of car using machine learning algorithms.
 
+DATA SOURCE
+https://archive.ics.uci.edu/ml/datasets/automobile
+
+
 ## Description
 
 
 | Attribute | Attribute Range | Type of variable |Short description | 
 | --- | --- | --- | ---|
-| symboling | -3, -2, -1, 0, 1, 2, 3.  | discrete | desc |
-| normalized-losses|from 65 to 256 | discrete  | desc |
+| symboling | -3, -2, -1, 0, 1, 2, 3.  | discrete | A value of +3 indicates that the auto is risky, -3 that it is probably pretty safe. |
+| normalized-losses|from 65 to 256 | discrete  |  represents the average loss per car per year. 
+ |
 | make |alfa-romero, audi, bmw, chevrolet, etc  | discrete  | desc |
 | fuel-type | diesel, gas.   | discrete  | desc |
 | aspiration | std, turbo | discrete  | desc |
@@ -47,13 +52,6 @@ Prediction price of car using machine learning algorithms.
 
 
 ```python
-#DATA SOURCE
-#https://archive.ics.uci.edu/ml/datasets/automobile
-
-```
-
-
-```python
 import pandas as pd
 import numpy as np
 from sklearn import preprocessing
@@ -61,8 +59,7 @@ from sklearn import preprocessing
 
 
 ```python
-
-df = pd.read_csv("dataset.csv")
+df = pd.read_csv("dataset.csv") # read a data
 ```
 
 
@@ -110,11 +107,8 @@ data_types
 
 
 ```python
-
 df["price"] = df["price"].apply(lambda x: x.replace("?", "0")) # replace "?" with "0"
 df["horsepower"] = df["horsepower"].apply(lambda x: x.replace("?", "0")) # replace "?" with "0"
-
-
 
 ```
 
@@ -162,8 +156,8 @@ Y = pd.cut(df.price, count_intervals, labels=LABELS)
 numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 numerical_columns = df.select_dtypes(include=numerics).columns
 X = df[numerical_columns]
-#SHOW FIRST 20 ROWS
-X.head(20)
+#SHOW FIRST 10 ROWS
+X.head(10)
 
 ```
 
@@ -353,156 +347,6 @@ X.head(20)
       <td>29</td>
       <td>16430.0</td>
     </tr>
-    <tr>
-      <th>11</th>
-      <td>0</td>
-      <td>101.2</td>
-      <td>176.8</td>
-      <td>64.8</td>
-      <td>54.3</td>
-      <td>2395</td>
-      <td>108</td>
-      <td>8.8</td>
-      <td>101.0</td>
-      <td>23</td>
-      <td>29</td>
-      <td>16925.0</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>0</td>
-      <td>101.2</td>
-      <td>176.8</td>
-      <td>64.8</td>
-      <td>54.3</td>
-      <td>2710</td>
-      <td>164</td>
-      <td>9.0</td>
-      <td>121.0</td>
-      <td>21</td>
-      <td>28</td>
-      <td>20970.0</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>0</td>
-      <td>101.2</td>
-      <td>176.8</td>
-      <td>64.8</td>
-      <td>54.3</td>
-      <td>2765</td>
-      <td>164</td>
-      <td>9.0</td>
-      <td>121.0</td>
-      <td>21</td>
-      <td>28</td>
-      <td>21105.0</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>1</td>
-      <td>103.5</td>
-      <td>189.0</td>
-      <td>66.9</td>
-      <td>55.7</td>
-      <td>3055</td>
-      <td>164</td>
-      <td>9.0</td>
-      <td>121.0</td>
-      <td>20</td>
-      <td>25</td>
-      <td>24565.0</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>0</td>
-      <td>103.5</td>
-      <td>189.0</td>
-      <td>66.9</td>
-      <td>55.7</td>
-      <td>3230</td>
-      <td>209</td>
-      <td>8.0</td>
-      <td>182.0</td>
-      <td>16</td>
-      <td>22</td>
-      <td>30760.0</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>0</td>
-      <td>103.5</td>
-      <td>193.8</td>
-      <td>67.9</td>
-      <td>53.7</td>
-      <td>3380</td>
-      <td>209</td>
-      <td>8.0</td>
-      <td>182.0</td>
-      <td>16</td>
-      <td>22</td>
-      <td>41315.0</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>0</td>
-      <td>110.0</td>
-      <td>197.0</td>
-      <td>70.9</td>
-      <td>56.3</td>
-      <td>3505</td>
-      <td>209</td>
-      <td>8.0</td>
-      <td>182.0</td>
-      <td>15</td>
-      <td>20</td>
-      <td>36880.0</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>2</td>
-      <td>88.4</td>
-      <td>141.1</td>
-      <td>60.3</td>
-      <td>53.2</td>
-      <td>1488</td>
-      <td>61</td>
-      <td>9.5</td>
-      <td>48.0</td>
-      <td>47</td>
-      <td>53</td>
-      <td>5151.0</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>1</td>
-      <td>94.5</td>
-      <td>155.9</td>
-      <td>63.6</td>
-      <td>52.0</td>
-      <td>1874</td>
-      <td>90</td>
-      <td>9.6</td>
-      <td>70.0</td>
-      <td>38</td>
-      <td>43</td>
-      <td>6295.0</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>0</td>
-      <td>94.5</td>
-      <td>158.8</td>
-      <td>63.6</td>
-      <td>52.0</td>
-      <td>1909</td>
-      <td>90</td>
-      <td>9.6</td>
-      <td>70.0</td>
-      <td>38</td>
-      <td>43</td>
-      <td>6575.0</td>
-    </tr>
   </tbody>
 </table>
 </div>
@@ -510,6 +354,204 @@ X.head(20)
 
 
 ## EDA
+
+
+```python
+df.columns
+```
+
+
+
+
+    Index(['symboling', 'normalized-losses', 'make', 'fuel-type', 'aspiration',
+           'num-of-doors', 'body-style', 'drive-wheels', 'engine-location',
+           'wheel-base', 'length', 'width', 'height', 'curb-weight', 'engine-type',
+           'num-of-cylinders', 'engine-size', 'fuel-system', 'bore', 'stroke',
+           'compression-ratio', 'horsepower', 'peak-rpm', 'city-mpg',
+           'highway-mpg', 'price'],
+          dtype='object')
+
+
+
+
+```python
+df.describe().T
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>symboling</th>
+      <td>199.0</td>
+      <td>0.839196</td>
+      <td>1.257009</td>
+      <td>-2.0</td>
+      <td>0.00</td>
+      <td>1.0</td>
+      <td>2.00</td>
+      <td>3.0</td>
+    </tr>
+    <tr>
+      <th>wheel-base</th>
+      <td>199.0</td>
+      <td>98.824121</td>
+      <td>6.090838</td>
+      <td>86.6</td>
+      <td>94.50</td>
+      <td>97.0</td>
+      <td>102.40</td>
+      <td>120.9</td>
+    </tr>
+    <tr>
+      <th>length</th>
+      <td>199.0</td>
+      <td>174.151256</td>
+      <td>12.371905</td>
+      <td>141.1</td>
+      <td>166.55</td>
+      <td>173.2</td>
+      <td>183.50</td>
+      <td>208.1</td>
+    </tr>
+    <tr>
+      <th>width</th>
+      <td>199.0</td>
+      <td>65.882412</td>
+      <td>2.110996</td>
+      <td>60.3</td>
+      <td>64.10</td>
+      <td>65.5</td>
+      <td>66.70</td>
+      <td>72.0</td>
+    </tr>
+    <tr>
+      <th>height</th>
+      <td>199.0</td>
+      <td>53.775879</td>
+      <td>2.447039</td>
+      <td>47.8</td>
+      <td>52.00</td>
+      <td>54.1</td>
+      <td>55.55</td>
+      <td>59.8</td>
+    </tr>
+    <tr>
+      <th>curb-weight</th>
+      <td>199.0</td>
+      <td>2556.030151</td>
+      <td>519.855544</td>
+      <td>1488.0</td>
+      <td>2157.00</td>
+      <td>2414.0</td>
+      <td>2930.50</td>
+      <td>4066.0</td>
+    </tr>
+    <tr>
+      <th>engine-size</th>
+      <td>199.0</td>
+      <td>126.824121</td>
+      <td>41.752932</td>
+      <td>61.0</td>
+      <td>97.50</td>
+      <td>119.0</td>
+      <td>143.00</td>
+      <td>326.0</td>
+    </tr>
+    <tr>
+      <th>compression-ratio</th>
+      <td>199.0</td>
+      <td>10.178995</td>
+      <td>4.022424</td>
+      <td>7.0</td>
+      <td>8.55</td>
+      <td>9.0</td>
+      <td>9.40</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <th>horsepower</th>
+      <td>199.0</td>
+      <td>103.396985</td>
+      <td>37.553843</td>
+      <td>48.0</td>
+      <td>70.00</td>
+      <td>95.0</td>
+      <td>116.00</td>
+      <td>262.0</td>
+    </tr>
+    <tr>
+      <th>city-mpg</th>
+      <td>199.0</td>
+      <td>25.201005</td>
+      <td>6.451826</td>
+      <td>13.0</td>
+      <td>19.00</td>
+      <td>24.0</td>
+      <td>30.00</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th>highway-mpg</th>
+      <td>199.0</td>
+      <td>30.683417</td>
+      <td>6.849410</td>
+      <td>16.0</td>
+      <td>25.00</td>
+      <td>30.0</td>
+      <td>34.00</td>
+      <td>54.0</td>
+    </tr>
+    <tr>
+      <th>price</th>
+      <td>199.0</td>
+      <td>13243.432161</td>
+      <td>7978.707609</td>
+      <td>5118.0</td>
+      <td>7775.00</td>
+      <td>10345.0</td>
+      <td>16501.50</td>
+      <td>45400.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+#df.hist(bins=10)
+```
 
 ## Models
 
@@ -567,7 +609,7 @@ from sklearn.metrics import accuracy_score
 print(accuracy_score(Y_test, predictions))
 ```
 
-    0.98
+    0.95
 
 
 
