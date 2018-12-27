@@ -19,10 +19,9 @@ https://archive.ics.uci.edu/ml/datasets/automobile
 
 
 | Attribute | Attribute Range | Type of variable |Short description | 
-| --- | --- | --- | ---|
+| --- | --- | --- | --- |
 | symboling | -3, -2, -1, 0, 1, 2, 3.  | discrete | A value of +3 indicates that the auto is risky, -3 that it is probably pretty safe. |
-| normalized-losses|from 65 to 256 | discrete  |  represents the average loss per car per year. 
- |
+| normalized-losses|from 65 to 256 | discrete  |  represents the average loss per car per year. |
 | make |alfa-romero, audi, bmw, chevrolet, etc  | discrete  | desc |
 | fuel-type | diesel, gas.   | discrete  | desc |
 | aspiration | std, turbo | discrete  | desc |
