@@ -382,7 +382,7 @@ X.describe().T
 
 
 
-<div>
+<!-- <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -395,7 +395,7 @@ X.describe().T
     .dataframe thead th {
         text-align: right;
     }
-</style>
+</style> -->
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
