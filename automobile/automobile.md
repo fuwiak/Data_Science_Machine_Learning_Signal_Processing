@@ -54,8 +54,6 @@ https://archive.ics.uci.edu/ml/datasets/automobile
 import pandas as pd
 import numpy as np
 from sklearn import preprocessing
-import scipy.stats as stats
-import sys
 ```
 
 
@@ -170,7 +168,7 @@ X.head(10)
 
 
 
-<div>
+<!-- <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -183,7 +181,7 @@ X.head(10)
     .dataframe thead th {
         text-align: right;
     }
-</style>
+</style> -->
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -363,6 +361,21 @@ X.head(10)
 
 
 ```python
+X.columns
+```
+
+
+
+
+    Index(['symboling', 'wheel-base', 'length', 'width', 'height', 'curb-weight',
+           'engine-size', 'compression-ratio', 'horsepower', 'city-mpg',
+           'highway-mpg', 'price'],
+          dtype='object')
+
+
+
+
+```python
 X.describe().T
 ```
 
@@ -538,34 +551,26 @@ X.describe().T
 
 
 ```python
-import scipy.stats as stats
-import matplotlib.pyplot as plt
-
-def histogram(df, column_name):
-#     assert scipy.stats in sys.modules,"No loaded stats"
-#     assert matplotlib.pyplot in sys.modules,"No loaded matplotlib.pyplot"
-    plt.hist(df[column_name],bins=5, normed=True)
-    plt.grid(color='grey', linestyle='-', linewidth=0.5)
-    param = stats.norm.fit(df[column_name])   # Fit a normal distribution to the data
-    x = np.linspace(min(df[column_name]), max(df[column_name]), len(df[column_name]))     # Linear spacing of 1000 elements between max and min
-    pdf_fitted = stats.norm.pdf(x, *param)    # Use the fitted paramters to create the y datapoints
-    plt.plot(x, pdf_fitted, color='r')
-    plt.title(column_name)
-    plt.xlabel("bins")
-    plt.ylabel("density")
+X.hist(bins=10)
 ```
 
 
-```python
-plt.figure(figsize=(20,20))
-for i in range(12):
-    
-    plt.subplot(3, 4, i+1)
-    histogram(X, X.columns[i])
-```
 
 
-![png](output_20_0.png)
+    array([[<matplotlib.axes._subplots.AxesSubplot object at 0x10c1cef28>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fbb5198>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fbde5c0>],
+           [<matplotlib.axes._subplots.AxesSubplot object at 0x10fc05b38>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fc380f0>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fc60668>],
+           [<matplotlib.axes._subplots.AxesSubplot object at 0x10fc86be0>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fcb91d0>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fcb9208>],
+           [<matplotlib.axes._subplots.AxesSubplot object at 0x10fd06c88>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fd37240>,
+            <matplotlib.axes._subplots.AxesSubplot object at 0x10fd5d7b8>]],
+          dtype=object)
+
 
 
 ## Models
@@ -598,6 +603,18 @@ my_class.fit(X_train, Y_train)
 ```
 
 
+
+
+    DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+                max_features=None, max_leaf_nodes=None,
+                min_impurity_decrease=0.0, min_impurity_split=None,
+                min_samples_leaf=1, min_samples_split=2,
+                min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+                splitter='best')
+
+
+
+
 ```python
 predictions = my_class.predict(X_test)
 ```
@@ -611,6 +628,9 @@ from sklearn.metrics import accuracy_score
 ```python
 print(accuracy_score(Y_test, predictions))
 ```
+
+    0.95
+
 
 
 ```python
