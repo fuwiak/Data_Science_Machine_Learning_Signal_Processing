@@ -116,9 +116,12 @@ pre {
 	border: 1px solid #eee;
 	border-radius: 4px;
 	padding: 10px;
+	text-align: left;
+    white-space: pre-line;
 }
 
 pre code {
+
 	background-color: transparent;
 	color: #333;
 }
@@ -428,7 +431,7 @@ button:focus {
 .mu-about-header {
 	display: inline;
 	float: left;
-	text-align: center;
+	text-align: left;
 	padding: 0 120px;
 	width: 100%;
 }
