@@ -452,9 +452,9 @@ button:focus {
 }
 
 .mu-about-content-left {
-	display: inline;
-	float: left;
-	width: 100%;
+	/*display: inline;*/
+	float: center;
+	width: 70%;
 }
 
 .mu-about-content-right {
