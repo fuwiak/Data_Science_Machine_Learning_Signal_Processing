@@ -43,7 +43,7 @@ idna==2.7
 imageio==2.4.1
 inflect==2.1.0
 itsdangerous==1.1.0
-Jinja2==2.10
+Jinja2==2.11.3
 joblib==0.13.1
 kaggle==1.5.0
 Keras==2.2.4
