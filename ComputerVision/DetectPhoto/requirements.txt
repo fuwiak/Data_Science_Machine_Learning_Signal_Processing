@@ -66,7 +66,7 @@ Naked==0.1.31
 networkx==2.2
 nltk==3.3
 numba==0.42.0
-numpy==1.15.4
+numpy==1.22.0
 oauthlib==3.0.1
 opencv-python==4.0.0.21
 pandas==0.24.2
