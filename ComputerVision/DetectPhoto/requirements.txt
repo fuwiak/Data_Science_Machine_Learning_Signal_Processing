@@ -74,7 +74,7 @@ pandas-profiling==1.4.1
 patsy==0.5.1
 pefile==2018.8.8
 Pillow==5.4.1
-protobuf==3.6.0
+protobuf==3.18.3
 pycosat==0.6.3
 pycparser==2.19
 pycrypto==2.6.1
